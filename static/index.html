@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Serving App</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <div id="prediction"></div>
+  <script>
+    function predict () {
+      window.prediction.innerHTML = ''
+      window.forecastUrl = `http://localhost:2000/predict`
+      window.fetch(window.forecastUrl)
+      .then(response => response.json())
+      .then(render_prediction)
+      .catch()
+    }
+
+    function render_prediction ({prediction}) {
+      window.prediction.innerHTML = '<h2>Predicted level of PM2.5: ' + prediction + 'µg/m3</h2>'
+    }
+
+    window.onload = predict
+  </script>
+</body>
+</html>
